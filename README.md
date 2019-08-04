@@ -6,4 +6,4 @@ connectdb.py contains the code to access a server I have created on MongoDB with
 
 It allows you to save to and access the database. 
 
-
+app.py contains the flask code to generate html
