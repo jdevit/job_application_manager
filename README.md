@@ -7,3 +7,7 @@ connectdb.py contains the code to access a server I have created on MongoDB with
 It allows you to save to and access the database. 
 
 app.py contains the flask code to generate html
+
+templates folder contains:
+index.html - forms to submit details regarding job applications
+search.html - search function to retrieve results based on search query
