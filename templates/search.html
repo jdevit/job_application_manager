@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <title>Search for a job application</title>
 </head>
-<form>
 
-<h1>Search</h1>
+<h1><a href="{{ url_for('search_page') }}">Search</a></h1>
 <a href="{{ url_for('home') }}"><h3>Click here to add another job application to database</h3></a>
 
-<form method="GET" action="/send"/>
+<form method="POST" action="/search_query"/>
         <div class="form-group">
-            <p>Search <input type="text" name="query" required></p>
+            <p>Search job title <input type="text" name="query" required></p>
         </div>
     <input class="btn btn-primary" type="submit" value="submit">
 </form>
 
 <p>Here</p>
+<div class="output">
+    {{nojobs}}
+    {%for a in jobs: %}
+        <li>{{a}}</li>
+    {%endfor%}
+ </div>
 
 
 </body>
