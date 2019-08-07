@@ -35,12 +35,17 @@ def connectToDb():
 	client = pymongo.MongoClient(host)
 	return client
 
+def getDatabase(client):
+	return client.newdb
+
 def getCollection(client):
+	# newdb: name of database saved in the MongoDB project
 	db = client.newdb
+	# jobapplications: name of collections in 'newdb' database
 	return db.jobapplications
 
 def saveToDb(collection, role_title, company, location, platform, cover_letter, date_applied):
-	# # Inserting Documents ##
+	# # Inserting Documents # #
 	numDocs = len(list(collection.find()))
 
 	job = jobAppDict(numDocs, role_title, company, location, platform, cover_letter, date_applied)
