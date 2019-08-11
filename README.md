@@ -1,4 +1,4 @@
-# python_mongodb_first
+# job_application_manager
 Using Python to access a MongoDB DB.
 
 
