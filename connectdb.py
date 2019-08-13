@@ -1,6 +1,7 @@
 import pymongo
 import mongoengine
 import datetime
+import dataneatener
 # import os
 # print(os.listdir())
 # from urllib.request import urlopen
@@ -9,7 +10,7 @@ import datetime
 
 
 def jobAppDict(numDocs, role_title, company, location, platform, cover_letter, date_applied):
-	job = {"_id": numDocs + 1, "role_title": role_title, "company": company, "location": location, "platform": platform,
+	job = {"doc_id": numDocs + 1, "role_title": role_title, "company": company, "location": location, "platform": platform,
 		   "cover_letter": cover_letter, "date_applied": date_applied, "published": datetime.datetime.now()}
 	return job
 
@@ -51,6 +52,27 @@ def saveToDb(collection, role_title, company, location, platform, cover_letter, 
 	job = jobAppDict(numDocs, role_title, company, location, platform, cover_letter, date_applied)
 	print(job)
 	collection.insert(job)
+
+def getCol():
+	client = connectToDb()
+	return getCollection(client)
+
+
+def getAllPosts():
+	## Connect to database
+	client = connectToDb()
+	col = getCollection(client)
+	posts = col.find()
+	return posts
+
+
+def getAllJobs():
+	posts = getAllPosts()
+	if posts.count() == 0:
+		jobs = ["None"]
+	else:
+		jobs = dataneatener.getListJobs(posts)
+	return jobs
 
 
 def main():

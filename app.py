@@ -6,11 +6,22 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    jobs = connectdb.getAllJobs()
+    return render_template('backend.html', jobs=jobs, lenjob=len(jobs))
 
 @app.route('/search_page')
 def search_page():
     return render_template('search.html')
+
+@app.route('/test_page')
+def test_page():
+    return render_template('test.html')
+
+@app.route('/manager_page')
+def manager_page():
+    jobs = connectdb.getAllJobs()
+
+    return render_template('view.html', jobs=jobs, lenjob=len(jobs))
 
 @app.route('/send', methods=['GET','POST'])
 def send():
@@ -27,7 +38,9 @@ def send():
 
         connectdb.saveToDb(col, role_title, company, location, platform, cover_letter, date_applied)
 
-        return render_template('index.html')
+        jobs = connectdb.getAllJobs()
+        return render_template('backend.html', jobs=jobs, lenjob=len(jobs))
+
     return render_template('index.html')
 
 @app.route('/search_query', methods=['GET','POST'])
@@ -57,6 +70,40 @@ def search_query():
         return render_template('search.html')
 
     return render_template('search.html')
+
+@app.route('/remove_job', methods=['GET','POST'])
+def remove_job():
+    if request.method == 'POST':
+        col = connectdb.getCol()
+        num_original_col = col.count()
+        selected_ids = request.form.getlist("selected_jobs")
+        selected_ids = list(map(int,selected_ids))
+        if(len(selected_ids)>0):
+            for id in selected_ids:
+                col.remove({"doc_id":id})
+                print("id:",id,"removed")
+
+            # Rearrange id number
+            print(selected_ids)
+            n=int(selected_ids[0])
+            m=n
+            print("numoriginal",num_original_col)
+            while n<=num_original_col:
+                if n in selected_ids:
+                    n+=1
+                else:
+                    print("Updated:",n,m)
+                    col.update({"doc_id":n},{"$set":{"doc_id":m}},upsert=False)
+                    n+=1
+                    m+=1
+
+        else:
+            print("None selected to delete")
+    else:
+        print("NOOO")
+
+    jobs = connectdb.getAllJobs()
+    return render_template('backend.html', jobs=jobs, lenjob=len(jobs))
 
 
 
