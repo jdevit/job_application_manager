@@ -3,65 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <title>Enter job applications</title>
+    <style>
+        .main-container {
+
+        }
+
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            overflow-x: hidden;
+            padding-top: 20px;
+            border-style: solid;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+            text-align:center;
+        }
+
+        .centred {
+<!--            position: absolute;-->
+            top: 50%;
+<!--            left: 50%;-->
+<!--            transform: translate(-50%, -50%);-->
+            text-align: center;
+        }
+
+
+    </style>
 </head>
 <p>
 
 <h1><a href="{{ url_for('home') }}">Job application tracker</a></h1>
 <h2>This form is to submit details regarding individual job applications sent</h2>
 
-<a href="{{ url_for('search_page') }}"><h3>Click here to search for list of applied jobs</h3></a>
+<h3><a href="{{ url_for('search_page') }}">Click here to search for list of applied jobs</a></h3>
+<h3><a href="{{ url_for('manager_page') }}">Click here to view the list of applied jobs</a></h3>
 <p>
     Please enter job application details
 </p>
 
-<p>
-    <form method="POST" action="/send"/>
-        <div class="form-group">
-            <p>Role Title <input type="text" name="role_title" required></p>
+<div class="main-container">
+    <div class="split left">
+
+        <div class="centred">
+            <form method="POST" action="/send"/>
+                <div class="form-group">
+                    <p>Role Title <input type="text" name="role_title" required></p>
+                </div>
+                <div class="form-group">
+                    <p>Company <input type="text" name="company" required></p>
+                </div>
+            <div class="form-group">
+                <p>Location
+                    <select name="location">
+                        <option value="London" selected>London</option>
+                        <option value="Guildford">Guildford</option>
+                        <option value="Reading">Reading</option>
+                        <option value="Maidenhead">Maidenhead</option>
+                    </select>
+                </p>
+            </div>
+            <div class="form-group">
+                <p>Platform
+                <select name="platform">
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="TotalJobs">TotalJobs</option>
+                        <option value="Reed">Reed</option>
+                        <option value="Indeed">Indeed</option>
+                        <option value="Recruiter">Recruiter</option>
+                        <option value="Google">Google</option>
+                        <option value="Website" selected>Website</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </p>
+                </div>
+                <div class="form-group">
+                    <p>Submitted cover letter?
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="yes" name="cover_letter" value="Yes">
+                        <label for="no">No</label>
+                        <input type="radio" id="no" name="cover_letter" value="No" checked></p>
+                </div>
+                <div class="form-group">
+                    <p>Date of application <input type="date" name="date_applied" required></p>
+                </div>
+
+                <p></p>
+                <input class="btn btn-primary" type="submit" value="submit">
+            </form>
+
         </div>
-        <div class="form-group">
-            <p>Company <input type="text" name="company" required></p>
-        </div>
-    <div class="form-group">
-        <p>Location
-            <select name="location">
-                <option value="London" selected>London</option>
-                <option value="Guildford">Guildford</option>
-                <option value="Reading">Reading</option>
-                <option value="Maidenhead">Maidenhead</option>
-            </select>
-        </p>
     </div>
-    <div class="form-group">
-        <p>Platform
-        <select name="platform">
-                <option value="LinkedIn">LinkedIn</option>
-                <option value="TotalJobs">TotalJobs</option>
-                <option value="Reed">Reed</option>
-                <option value="Indeed">Indeed</option>
-                <option value="Recruiter">Recruiter</option>
-                <option value="Google">Google</option>
-                <option value="Website" selected>Website</option>
-                <option value="Other">Other</option>
-            </select>
-        </p>
-        </div>
-        <div class="form-group">
-            <p>Submitted cover letter?
-                <label for="yes">Yes</label>
-                <input type="radio" id="yes" name="cover_letter" value="Yes">
-                <label for="no">No</label>
-                <input type="radio" id="no" name="cover_letter" value="No" checked></p>
-        </div>
-        <div class="form-group">
-            <p>Date of application <input type="date" name="date_applied" required></p>
-        </div>
 
-        <p></p>
-        <input class="btn btn-primary" type="submit" value="submit">
-    </form>
+    <div class="split right">
+        <div class="centred right">
+            <p>Right hand side</p>
+            <a href="{{ url_for('test_page') }}">Hello test link</a>
 
-</p>
+            <div>
+            {% block content %} {% endblock %}
+            </div>
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

@@ -5,8 +5,10 @@
     <title>Search for a job application</title>
 </head>
 
+<body>
 <h1><a href="{{ url_for('search_page') }}">Search</a></h1>
 <a href="{{ url_for('home') }}"><h3>Click here to add another job application to database</h3></a>
+
 
 <form method="POST" action="/search_query"/>
         <div class="form-group">
