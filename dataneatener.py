@@ -7,6 +7,16 @@
 
 '''
 
+def normaliseDate(date):
+    dates = date.split("-")
+    date = ""
+    for d in reversed(dates):
+        if d != dates[0]:
+            date += d + "-"
+        else:
+            date += d
+    return date
+
 def neatenJob(job):
     return job
 
@@ -19,6 +29,9 @@ def getListJobs(jobs):
 
 def main():
     print("Data neatener")
+
+    date = "2019-08-13"
+    normaliseDate(date)
 
 
 

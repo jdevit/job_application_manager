@@ -11,7 +11,7 @@ import dataneatener
 
 def jobAppDict(numDocs, role_title, company, location, platform, cover_letter, date_applied):
 	job = {"doc_id": numDocs + 1, "role_title": role_title, "company": company, "location": location, "platform": platform,
-		   "cover_letter": cover_letter, "date_applied": date_applied, "published": datetime.datetime.now()}
+		   "cover_letter": cover_letter, "date_applied": date_applied, "status": "Pending", "stage": "Pending","published": datetime.datetime.now()}
 	return job
 
 

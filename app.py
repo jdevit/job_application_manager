@@ -87,7 +87,6 @@ def remove_job():
             print(selected_ids)
             n=int(selected_ids[0])
             m=n
-            print("numoriginal",num_original_col)
             while n<=num_original_col:
                 if n in selected_ids:
                     n+=1
@@ -96,11 +95,8 @@ def remove_job():
                     col.update({"doc_id":n},{"$set":{"doc_id":m}},upsert=False)
                     n+=1
                     m+=1
-
         else:
             print("None selected to delete")
-    else:
-        print("NOOO")
 
     jobs = connectdb.getAllJobs()
     return render_template('backend.html', jobs=jobs, lenjob=len(jobs))
