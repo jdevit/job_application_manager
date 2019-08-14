@@ -17,6 +17,8 @@
                         <th scope="col">Platform</th>
                         <th scope="col">Cover Letter</th>
                         <th scope="col">Date Applied</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Stage</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +33,18 @@
                         <td>{{ job.platform }}</td>
                         <td>{{ job.cover_letter }}</td>
                         <td>{{ job.date_applied }}</td>
+                        <td>
+                            <select name="job_status">
+                                {% for status in ["Pending","Active","Declined","No Response"] %}
+                                    {% if job.status==status %}
+                                        <option value={{ status }} selected>{{ status }}</option>
+                                    {% else %}
+                                        <option value={{ status }}>{{ status }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>{{ job.stage }}</td>
                     </tr>
                 {% endfor %}
 

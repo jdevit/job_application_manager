@@ -35,8 +35,19 @@
 
 
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+<!--        if(window.angular == 'undefined') {-->
+<!--            alert("ANGULAR OK!");-->
+<!--        }-->
+<!--        else{-->
+<!--            alert("ANGULAR NOT LOADED!");-->
+<!--        }-->
+    </script>
+
 </head>
-<p>
+<body>
+<div ng-app="">
 
 <h1><a href="{{ url_for('home') }}">Job application tracker</a></h1>
 <h2>This form is to submit details regarding individual job applications sent</h2>
@@ -46,6 +57,11 @@
 <p>
     Please enter job application details
 </p>
+
+<div>
+    <p>Name: <input type="text" ng-model="name1" placeholder="YOUR NAME"> </p>
+    <p>Your name is <span ng-bind="name1"></span></p>
+</div>
 
 <div class="main-container">
     <div class="split left">
@@ -103,7 +119,6 @@
     <div class="split right">
         <div class="centred right">
             <p>Right hand side</p>
-            <a href="{{ url_for('test_page') }}">Hello test link</a>
 
             <div>
             {% block content %} {% endblock %}
@@ -112,6 +127,6 @@
         </div>
     </div>
 </div>
-
+</div>
 </body>
 </html>
