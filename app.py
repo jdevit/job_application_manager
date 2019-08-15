@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    ''' Return to homepage via 'backend.html'
+
+    :return:
+    '''
     jobs = connectdb.getAllJobs()
     return render_template('backend.html', jobs=jobs, lenjob=len(jobs))
 
@@ -25,6 +29,10 @@ def manager_page():
 
 @app.route('/send', methods=['GET','POST'])
 def send():
+    ''' Send all fields completed to database to add a job application record to collection
+
+    :return:
+    '''
     if request.method == 'POST':
         role_title = request.form['role_title']
         company = request.form['company']
@@ -73,6 +81,10 @@ def search_query():
 
 @app.route('/remove_job', methods=['GET','POST'])
 def remove_job():
+    ''' Deletes a job application record from database from list of ID
+
+    :return:
+    '''
     if request.method == 'POST':
         col = connectdb.getCol()
         num_original_col = col.count()

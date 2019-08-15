@@ -8,6 +8,11 @@
 '''
 
 def normaliseDate(date):
+    ''' Normalise date from standard YYYY-MM-DD to DD-MM-YYYY
+
+    :param date: String: date
+    :return: String: date but reversed with day-month-year
+    '''
     dates = date.split("-")
     date = ""
     for d in reversed(dates):
@@ -18,9 +23,19 @@ def normaliseDate(date):
     return date
 
 def neatenJob(job):
+    '''Method supposed to format job application dictionary
+
+    :param job: Dictionary: job application
+    :return: Dictionary: job application
+    '''
     return job
 
 def getListJobs(jobs):
+    ''' Gets a list of job dictionaries
+
+    :param jobs: PyMongo cursor list: list of dictionaries
+    :return: List: list of job application documents (dictionaries)
+    '''
     listJobs = []
     for job in jobs:
         listJobs.append(neatenJob(job))
