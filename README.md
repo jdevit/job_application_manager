@@ -1,6 +1,5 @@
 # job_application_manager
 Using Python to access a MongoDB DB.
-Will use AngularJS for frontend.
 
 connectdb.py contains the code to access a server I have created on MongoDB with username and password included.
 It allows you to save to and access the database. 
