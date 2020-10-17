@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Save your job application</title>
+</head>
+<body>
+{% include 'header.html' %}
+
+
+<section>
+    <div class="main-content">
+        <div class="heading-sec-1">
+            <h1>Enter your job applications</h1>
+        </div>
+
+        <div class="content-sec-1">
+            <p>Form fields here</p>
+            <div class="form-block content-sec-2">
+                <form method="POST" action="/save/posting">
+                    <p>Role title
+                        <input type="text" name="new-input-role-title" required>
+                    </p>
+                    <p>Company
+                        <input type="text" name="new-input-company-name" required>
+                    </p>
+                    <p>Date
+                        <input type="date" name="new-input-date" required>
+                    </p>
+
+                    <p>
+                        <input type="submit">
+                    </p>
+
+                </form>
+            </div>
+
+            <div class="content-sec-2">
+                <a href="/save/auto/gmail">Autosave from gmail</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+{% include 'footer.html' %}
+
+</body>
+</html>

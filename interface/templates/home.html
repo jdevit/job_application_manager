@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+{% include 'header.html' %}
+
+<p>Homepage content</p>
+
+
+<p><a href="{{ url_for('link_to_save') }}">Save a new job application</a></p>
+<p><a href="{{ url_for('link_to_saved_jobs') }}">View existing job application</a></p>
+
+{% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viewing all saved jobs</title>
+</head>
+<body>
+{% include 'header.html' %}
+
+
+<section>
+    <div class="main-content">
+        <div class="heading-sec-1">
+            <h1>Here are your saved job applications</h1>
+        </div>
+
+        <div class="content-sec-1">
+            <p>Display information here</p>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Role</th>
+                        <th>Company</th>
+                        <th>Date</th>
+                    </tr>
+                {% for job in all_jobs %}
+                    <tr>
+                        <td>{{ job['role'] }}</td>
+                        <td>{{ job['company'] }}</td>
+                        <td>{{ job['date'] }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+{% include 'footer.html' %}
+
+</body>
+</html>
