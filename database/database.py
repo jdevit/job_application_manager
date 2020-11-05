@@ -1,6 +1,11 @@
+from log import Log
 import pymongo
 import mongoengine
 import json
+
+
+from bson import ObjectId
+
 
 class Database(object):
 
@@ -17,11 +22,17 @@ class Database(object):
 
         self.usernamepasswordFile = 'info/userpass.json'
         self.mongoinfoFile = 'info/mongoinfo.json'
-        self.client = self.verifyDatabaseConnection()
-        self.db = self.client[self.dbname]
-        self.collection_jobs = self.db['jobs']
+        self.client = self.verifyDatabaseConnection()   # Client
+        self.db = self.client[self.dbname]              # Database of client
+        self.collection_jobs = self.db['jobs']          # Collection: Jobs
+        self.collection_users = None                    # Collection: Users
 
     def verifyDatabaseConnection(self):
+        '''
+        Verifies database connection by logging in to database with provided files
+        :return:
+        '''
+        Log.save_to_log('[Database.py] Verifying Database Connection...')
         with open(self.usernamepasswordFile) as json_file:
             userpass = json.load(json_file)
             username, password = userpass['username'], userpass['password']
@@ -30,6 +41,7 @@ class Database(object):
             mongo_info = json.load(json_file)
             cluster, self.dbname = mongo_info['cluster'], mongo_info['database']
 
+        Log.save_to_log('[Database.py] Establishing Connection')
         ## Establishing connection
         host = "mongodb+srv://" + username + ":" + password + "@" + cluster + ".ibogz.mongodb.net/" + self.dbname + "?retryWrites=true&w=majority"
 
@@ -37,16 +49,41 @@ class Database(object):
         mongoengine.connect(self.dbname, host=host)
         client = pymongo.MongoClient(host)
 
-        print("Connected to mongodb.")
+        Log.save_to_log('[Database.py] Connected to Mongodb.')
         return client
 
     def save_data_job(self, job):
+        ''' Inserts the given data (already formatted) into the MongoDB database '''
 
-        self.collection_jobs.insert(job)
-        print("Inserted job data into 'jobs' collection")
+        Log.save_to_log('[Database.py] Saving data (job)...')
+
+        self.collection_jobs.insert(job)  # JSON format
+
+        Log.save_to_log('[Database.py] Data (jobs) saved.')
+
 
 
     def get_data_job(self):
+        '''
+        Retrieves the collection jobs
+        :return:
+        '''
 
+        Log.save_to_log('[Database.py] Retrieving data (job).')
         return self.collection_jobs.find()
 
+
+    def delete_one_data_job(self, id):
+        Log.save_to_log('[Database.py] Attempting to delete:', id)
+
+        self.collection_jobs.delete_one({ "_id" : ObjectId(id) })
+
+        Log.save_to_log('[Database.py] Successfully removed:', id)
+        return True
+
+    def update_one_data_job(self, id, new_values):
+        Log.save_to_log('[Database.py] Attempting to update:', id, new_values)
+
+        self.collection_jobs.update({ "_id" : ObjectId(id) }, new_values)
+
+        Log.save_to_log('[Database.py] Successfully updated:', id)
