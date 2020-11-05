@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from nltk.stem.porter import *
-
+from log import Log
 
 class AutoGmail(object):
     instance = None
@@ -27,12 +27,13 @@ class AutoGmail(object):
         """Shows basic usage of the Gmail API.
         Lists the user's Gmail labels.
         """
+        Log.save_to_log('[autogmail.py] Attempting to connect to Gmail API.')
+
         creds = None
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
         if os.path.exists('token.pickle'):
-            print("tokenpickle exists")
             with open('token.pickle', 'rb') as token:
                 creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
@@ -48,6 +49,8 @@ class AutoGmail(object):
                 pickle.dump(creds, token)
 
         service = build('gmail', 'v1', credentials=creds)
+
+        Log.save_to_log('[autogmail.py] Successfully connected to Gmail API.')
         return service
 
 
@@ -55,11 +58,12 @@ class AutoGmail(object):
     ## https://developers.google.com/gmail/api/reference/rest/v1/users.messages#Message
 
     def getInbox(self, numMessages=0):
+        Log.save_to_log('[autogmail.py] Getting inbox...')
         stemmer = PorterStemmer()
 
         results = self.service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
         inbox_messages = results.get('messages', [])
-        if numMessages != 0:  # Get entire inbox
+        if numMessages != 0:  # Get limited inbox
             inbox_messages = inbox_messages[0: numMessages]
 
         if not inbox_messages:
@@ -73,15 +77,14 @@ class AutoGmail(object):
                 subject = next(item["value"] for item in msg['payload']['headers'] if item["name"] == "Subject")
 
                 # message_body = [item for item in msg['payload']['body'] if 'data' in item]
-                message_x = msg['payload']['parts']
-                print("msg_x",message_x)
 
 
                 subject_stemmed = [stemmer.stem(word) for word in subject.split(" ")]
                 if "appli" in subject or "applic" in subject_stemmed:
                     print(sender,subject)
+                # TODO: check application body text to confirm application received.
 
-
+        Log.save_to_log('[autogmail.py] Finished getting inbox.')
         return 'None so far'
 
 
