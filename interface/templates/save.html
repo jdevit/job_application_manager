@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% include 'head.html' %}
+
     <title>Save your job application</title>
 </head>
 <body>
@@ -9,38 +11,51 @@
 
 
 <section>
-    <div class="main-content">
-        <div class="heading-sec-1">
-            <h1>Enter your job applications</h1>
-        </div>
+    <div class="container-fluid">
+        <h1>Enter your job applications</h1>
+    </div>
 
-        <div class="content-sec-1">
-            <p>Form fields here</p>
-            <div class="form-block content-sec-2">
-                <form method="POST" action="/save/posting">
-                    <p>Role title
-                        <input type="text" name="new-input-role-title" required>
-                    </p>
-                    <p>Company
-                        <input type="text" name="new-input-company-name" required>
-                    </p>
-                    <p>Date
-                        <input type="date" name="new-input-date" required>
-                    </p>
+    <div class="container-fluid">
+        <p>Fill in the form</p>
 
-                    <p>
-                        <input type="submit">
-                    </p>
-
-                </form>
+        <form method="POST" action="/save/posting">
+            <div class="form-group">
+                <label>Role title</label>
+                <input type="text" name="new-input-role-title" required>
             </div>
 
-            <div class="content-sec-2">
-                <a href="/save/auto/gmail">Autosave from gmail</a>
+            <div class="form-group">
+                <label>Company</label>
+                <input type="text" name="new-input-company-name" required>
             </div>
-        </div>
+
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="new-input-date" required>
+            </div>
 
 
+            <div class="form-group">
+                <label>Website</label>
+
+                <select class="custom-select w-25" name="new-input-website" onchange="checkEnableOther(this)">
+                    <option value="none" selected>Select one</option>
+                    <option value="linkedin">   LinkedIn</option>
+                    <option value="glassdoor">  Glassdoor</option>
+                    <option value="other">      Other</option>
+                </select>
+
+                <input type="text" placeholder="Please specify" class="d-none" id="website_dropdown_other_text" name="new-input-website-other" disabled="true" required>
+            </div>
+
+
+            <input class="btn btn-success" type="submit">
+
+        </form>
+    </div>
+
+    <div class="container-fluid">
+        <a href="/save/auto/gmail">Autosave from gmail</a>
     </div>
 
 </section>

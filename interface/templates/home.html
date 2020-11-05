@@ -2,16 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% include 'head.html' %}
+
     <title>Homepage</title>
 </head>
 <body>
 {% include 'header.html' %}
 
-<p>Homepage content</p>
+<div class="container-fluid">
+    <h2>The Job Application Manager</h2>
+    <p>Homepage</p>
+    {% if saved is defined %}
+    <div class="alert alert-success">Your job application has been saved!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+    {% endif %}
+
+</div>
+
+<div class="container-fluid">
+    <a class="btn btn-success" href="{{ url_for('link_to_save') }}">Save a new job application</a>
+    <a class="btn btn-info" href="{{ url_for('link_to_view_jobs') }}">View existing job application</a>
+</div>
 
 
-<p><a href="{{ url_for('link_to_save') }}">Save a new job application</a></p>
-<p><a href="{{ url_for('link_to_saved_jobs') }}">View existing job application</a></p>
 
 {% include 'footer.html' %}
 </body>
