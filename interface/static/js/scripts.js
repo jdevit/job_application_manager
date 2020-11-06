@@ -22,7 +22,7 @@ function deleteDataConfirmButton(){
             $('#alert_message_table_update').html('<div class="alert alert-danger">Your '
             +'job application has been successfully deleted'
             +'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
-            $('#jobs_table').DataTable().ajax.reload();
+            cancelModifyButton();
           },
           error: function(xhr) {
             //Do Something to handle error
@@ -84,7 +84,7 @@ function modifyDataButton(btn){
     row.find('td').css('background-color', 'grey');
 }
 
-function cancelModifyButton(btn){
+function cancelModifyButton(){
 //    Show columns
     $('#jobs_table').DataTable().columns( [0] ).visible( true );
 
@@ -95,7 +95,7 @@ function cancelModifyButton(btn){
     //    TODO: NEEDS TABLE HEADER ENABLE
 
 //    Un-highlight row background
-    $(btn).closest("tr").find('td').removeAttr("style");
+//    $(btn).closest("tr").find('td').removeAttr("style");
 //    Hide Columns
     $('#jobs_table').DataTable().columns( [1,8,9] ).visible( false );
 
@@ -170,7 +170,7 @@ function saveDataButton(btn){
             $('#alert_message_table_update').html('<div class="alert alert-success">Your '
             +'changes has been successfully saved'
             +'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
-            cancelModifyButton(btn.parentNode);
+            cancelModifyButton();
           },
           error: function(xhr) {
             //Do Something to handle error
