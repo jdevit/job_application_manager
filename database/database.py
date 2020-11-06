@@ -74,16 +74,16 @@ class Database(object):
 
 
     def delete_one_data_job(self, id):
-        Log.save_to_log('[Database.py] Attempting to delete:', id)
+        Log.save_to_log('[Database.py] Attempting to delete:' + str(id))
 
         self.collection_jobs.delete_one({ "_id" : ObjectId(id) })
 
-        Log.save_to_log('[Database.py] Successfully removed:', id)
+        Log.save_to_log('[Database.py] Successfully removed:' + str(id))
         return True
 
     def update_one_data_job(self, id, new_values):
-        Log.save_to_log('[Database.py] Attempting to update:', id, new_values)
+        Log.save_to_log('[Database.py] Attempting to update:' + str(id) + str(new_values))
 
         self.collection_jobs.update({ "_id" : ObjectId(id) }, new_values)
 
-        Log.save_to_log('[Database.py] Successfully updated:', id)
+        Log.save_to_log('[Database.py] Successfully updated:' + str(id))

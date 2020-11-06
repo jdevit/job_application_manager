@@ -98,7 +98,7 @@ class Interface(object):
 
         @self.app.route('/delete_selected_data/<input_id_list>')
         def delete_selected_data(input_id_list):
-            Log.save_to_log('[Interface.py] Deleting data:', input_id_list)
+            Log.save_to_log('[Interface.py] Deleting data:' + str(input_id_list))
 
             id_list = input_id_list.rstrip(',').split(',')
             print(id_list)
@@ -108,7 +108,7 @@ class Interface(object):
 
         @self.app.route('/update_selected_data/<input_id>/<list_values>')
         def update_selected_data(input_id, list_values):
-            Log.save_to_log('[Interface.py] Updating data:', input_id, list_values)
+            Log.save_to_log('[Interface.py] Updating data:' + str(input_id) + str(list_values))
 
             example_id = '5f948f8af2436672c82304fd'
             example_list_values = []
