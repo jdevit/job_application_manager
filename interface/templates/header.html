@@ -3,10 +3,36 @@
 
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand btn btn-link" href="{{ url_for('home') }}">JAM</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    {% if session['logged_in'] %}
+                    <a class="navbar-brand btn btn-link" href="{{ url_for('link_to_dashboard') }}">JAM</a>
+                    {% else %}
+                    <a class="navbar-brand btn btn-link" href="{{ url_for('home') }}">JAM</a>
+                    {% endif %}
+                </li>
+
+            </ul>
+            {% if session['logged_in'] %}
+                <a class="btn btn-primary" href="{{ url_for('link_to_user_account') }}">{{ session['user']['username'] }}</a>
+            {% else %}
+                <a class="btn btn-link" href="{{ url_for('link_to_login') }}">Login</a>
+                <a class="btn btn-link" href="{{ url_for('link_to_register') }}">Register</a>
+            {% endif %}
+
         </nav>
     </div>
 
 </header>
 
 <div id="main" class="m-3">
+
+    <div class="container-fluid">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </div>
