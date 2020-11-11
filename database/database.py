@@ -25,7 +25,7 @@ class Database(object):
         self.client = self.verifyDatabaseConnection()   # Client
         self.db = self.client[self.dbname]              # Database of client
         self.collection_jobs = self.db['jobs']          # Collection: Jobs
-        self.collection_users = None                    # Collection: Users
+        self.collection_users = self.db['users']        # Collection: Users
 
     def verifyDatabaseConnection(self):
         '''
@@ -52,38 +52,40 @@ class Database(object):
         Log.save_to_log('[Database.py] Connected to Mongodb.')
         return client
 
-    def save_data_job(self, job):
-        ''' Inserts the given data (already formatted) into the MongoDB database '''
+    def checkEmailPasswordLogin(self, email, password):
+        users = self.collection_users.find({'email': email, 'password': password})
 
-        Log.save_to_log('[Database.py] Saving data (job)...')
-
-        self.collection_jobs.insert(job)  # JSON format
-
-        Log.save_to_log('[Database.py] Data (jobs) saved.')
-
-
-
-    def get_data_job(self):
-        '''
-        Retrieves the collection jobs
-        :return:
-        '''
-
-        Log.save_to_log('[Database.py] Retrieving data (job).')
-        return self.collection_jobs.find()
+    # def save_data_job(self, job):
+    #     ''' Inserts the given data (already formatted) into the MongoDB database '''
+    #
+    #     Log.save_to_log('[Database.py] Saving data (job)...')
+    #
+    #     self.collection_jobs.insert(job)  # JSON format
+    #
+    #     Log.save_to_log('[Database.py] Data (jobs) saved.')
 
 
-    def delete_one_data_job(self, id):
-        Log.save_to_log('[Database.py] Attempting to delete:' + str(id))
+    # def get_data_job(self):
+    #     '''
+    #     Retrieves the collection jobs
+    #     :return:
+    #     '''
+    #
+    #     Log.save_to_log('[Database.py] Retrieving data (job).')
+    #     return self.collection_jobs.find()
 
-        self.collection_jobs.delete_one({ "_id" : ObjectId(id) })
 
-        Log.save_to_log('[Database.py] Successfully removed:' + str(id))
-        return True
+    # def delete_one_data_job(self, id):
+    #     Log.save_to_log('[Database.py] Attempting to delete:' + str(id))
+    #
+    #     self.collection_jobs.delete_one({ "_id" : ObjectId(id) })
+    #
+    #     Log.save_to_log('[Database.py] Successfully removed:' + str(id))
+    #     return True
 
-    def update_one_data_job(self, id, new_values):
-        Log.save_to_log('[Database.py] Attempting to update:' + str(id) + str(new_values))
-
-        self.collection_jobs.update({ "_id" : ObjectId(id) }, new_values)
-
-        Log.save_to_log('[Database.py] Successfully updated:' + str(id))
+    # def update_one_data_job(self, id, new_values):
+    #     Log.save_to_log('[Database.py] Attempting to update:' + str(id) + str(new_values))
+    #
+    #     self.collection_jobs.update({ "_id" : ObjectId(id) }, new_values)
+    #
+    #     Log.save_to_log('[Database.py] Successfully updated:' + str(id))
