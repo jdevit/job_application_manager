@@ -128,7 +128,6 @@ function editValueInput(btn){
 }
 
 function saveDataButton(btn){
-    alert("Saving changes...");
     var currentRow = $(btn).closest("tr");
     var data = $('#jobs_table').DataTable().row(currentRow).data();
     var id = data['_id'];
@@ -160,7 +159,6 @@ function saveDataButton(btn){
         idx++;
     })
 
-    alert(listNewValues);
 
 
 //    Ajax call to update database
@@ -178,7 +176,6 @@ function saveDataButton(btn){
          }
     });
 
-    alert("Fin");
 }
 
 
