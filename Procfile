@@ -1,1 +1,1 @@
-web: job-applications-manager __main__:self.app
+web: job-applications-manager __main__
