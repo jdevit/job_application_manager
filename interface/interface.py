@@ -198,7 +198,7 @@ class Interface(object):
 
     def run(self):
         try:
-            self.app.run(debug=True)
+            self.app.run(debug=False)
             Log.save_to_log('[Interface.py] App is running. debug = ' + str(self.app.debug))
         except:
             Log.save_to_log('[Interface.py] App is not running. debug = '+ str(self.app.debug))
