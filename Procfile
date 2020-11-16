@@ -1,1 +1,1 @@
-web: job-applications-manager __main__
+web: gunicorn __main__:app
