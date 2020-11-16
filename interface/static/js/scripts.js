@@ -19,14 +19,11 @@ function deleteDataConfirmButton(){
     $.ajax({
         url: '/delete_selected_data/'+id,
         success: function(response) {
-            $('#alert_message_table_update').html('<div class="alert alert-danger">Your '
-            +'job application has been successfully deleted'
-            +'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
             cancelModifyButton();
           },
           error: function(xhr) {
             //Do Something to handle error
-            alert("error: "+xhr);
+            console.log("error: "+xhr);
          }
     });
 }
@@ -165,14 +162,11 @@ function saveDataButton(btn){
     $.ajax({
         url: '/update_selected_data/'+id+'/'+listNewValues,
         success: function(response) {
-            $('#alert_message_table_update').html('<div class="alert alert-success">Your '
-            +'changes has been successfully saved'
-            +'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
             cancelModifyButton();
           },
           error: function(xhr) {
             //Do Something to handle error
-            alert("error: "+xhr);
+            console.log("error: "+xhr);
          }
     });
 
