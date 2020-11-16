@@ -1,0 +1,6 @@
+### Requirements ###
+pymongo
+mongoengine
+flask
+flask-bcrypt
+flask-wtf
