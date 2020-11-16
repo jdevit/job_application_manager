@@ -4,3 +4,4 @@ mongoengine
 flask
 flask-bcrypt
 flask-wtf
+gunicorn
