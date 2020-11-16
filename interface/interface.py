@@ -14,16 +14,16 @@ class Interface(object):
     instance = None
 
     @staticmethod
-    def getInstance():
+    def getInstance(app):
         if Interface.instance is None:
-            Interface.instance = Interface()
+            Interface.instance = Interface(app)
         return Interface.instance
 
 
-    def __init__(self):
+    def __init__(self, app):
         super(Interface, self).__init__()
         
-        self.app = Flask(__name__)
+        self.app = app
         self.setRoutes()
         self.app.config['SECRET_KEY'] = '4513cb7cfb867ef6a7191634da6b8170'
         self.bcrypt = Bcrypt(self.app)
