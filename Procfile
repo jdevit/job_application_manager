@@ -1,0 +1,1 @@
+web: job-applications-manager __main__:self.app
