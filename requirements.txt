@@ -1,7 +1,55 @@
-### Requirements ###
-pymongo
-mongoengine
-flask
-flask-bcrypt
-flask-wtf
-gunicorn
+argon2-cffi==19.1.0
+astroid==2.4.2
+bcrypt @ file:///C:/ci/bcrypt_1597936263757/work
+cachetools==4.1.1
+certifi==2020.6.20
+cffi @ file:///C:/ci/cffi_1600699246375/work
+chardet==3.0.4
+click==7.1.2
+colorama==0.4.3
+cryptography @ file:///C:/ci/cryptography_1601046905460/work
+dnspython==2.0.0
+email-validator==1.1.2
+Flask==1.1.2
+Flask-Bcrypt @ file:///tmp/build/80754af9/flask-bcrypt_1592513356562/work
+Flask-WTF==0.14.3
+google-api-core==1.22.4
+google-api-python-client==1.12.3
+google-auth==1.22.1
+google-auth-httplib2==0.0.4
+google-auth-oauthlib==0.4.1
+googleapis-common-protos==1.52.0
+gunicorn==20.0.4
+httplib2==0.18.1
+idna==2.10
+isort==4.3.21
+itsdangerous==1.1.0
+Jinja2==2.11.2
+joblib==0.17.0
+lazy-object-proxy==1.4.3
+MarkupSafe==1.1.1
+mccabe==0.6.1
+mongoengine==0.20.0
+nltk==3.5
+oauthlib==3.1.0
+passlib==1.7.4
+protobuf==3.13.0
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
+pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+pylint==2.5.3
+pymongo==3.11.0
+pytz==2020.1
+regex==2020.10.15
+requests==2.24.0
+requests-oauthlib==1.3.0
+rsa==4.6
+six==1.15.0
+toml==0.10.1
+tqdm==4.50.2
+uritemplate==3.0.1
+urllib3==1.25.10
+Werkzeug==1.0.1
+wincertstore==0.2
+wrapt==1.12.1
+WTForms @ file:///tmp/build/80754af9/wtforms_1597707484216/work
