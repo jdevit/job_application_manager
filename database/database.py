@@ -3,7 +3,6 @@ import pymongo
 import mongoengine
 import json
 
-
 from bson import ObjectId
 
 
@@ -19,6 +18,14 @@ class Database(object):
 
     def __init__(self):
         super(Database, self).__init__()
+
+        ## TODO: When initialised, check:
+        #   If using MongodDBfile:
+        #       Login manually (verifyDatabaseConnection)
+        #           or
+        #       Login via deployment
+        #   Else:
+        #       Not using MongoDB so local db
 
         self.usernamepasswordFile = 'info/userpass.json'
         self.mongoinfoFile = 'info/mongoinfo.json'

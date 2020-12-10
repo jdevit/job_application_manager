@@ -7,23 +7,21 @@ from flask_bcrypt import Bcrypt
 import json
 
 
-# TODO: 1. Change all checkboxes to Modify button
-#       2. Bug: refresh toggle disable delete button if clicked next page of table
 class Interface(object):
 
     instance = None
 
     @staticmethod
-    def getInstance(app):
+    def getInstance():
         if Interface.instance is None:
-            Interface.instance = Interface(app)
+            Interface.instance = Interface()
         return Interface.instance
 
 
-    def __init__(self, app):
+    def __init__(self):
         super(Interface, self).__init__()
         
-        self.app = app
+        self.app = Flask(__name__)
         self.setRoutes()
         self.app.config['SECRET_KEY'] = '4513cb7cfb867ef6a7191634da6b8170'
         self.bcrypt = Bcrypt(self.app)
@@ -202,3 +200,4 @@ class Interface(object):
             Log.save_to_log('[Interface.py] App is running. debug = ' + str(self.app.debug))
         except:
             Log.save_to_log('[Interface.py] App is not running. debug = '+ str(self.app.debug))
+
